@@ -29,6 +29,20 @@ func NewCappedDeque(capacity int) *Deque {
 	}
 }
 
+// Append inserts element at the back of the Deque in a O(1) time complexity,
+// returning true if successful or false if the deque is at capacity.
+func (s *Deque) Append(item interface{}) bool {
+	s.Lock()
+	defer s.Unlock()
+
+	if s.capacity < 0 || s.container.Len() < s.capacity {
+		s.container.PushBack(item)
+		return true
+	}
+
+	return false
+}
+
 // Prepend inserts element at the Deques front in a O(1) time complexity,
 // returning true if successful or false if the deque is at capacity
 func (s *Deque) Prepend(item interface{}) bool {
