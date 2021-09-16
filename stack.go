@@ -1,4 +1,4 @@
-package main
+package gods
 
 type Stack struct {
 	*Deque
